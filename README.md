@@ -21,6 +21,7 @@ This project is a **Flask-based web application** that allows users to upload a 
 - pandas
 - openpyxl
 - Bootstrap (included via CDN)
+- pycryptodome
 
 ## Installation
 1. Clone this repository:
@@ -30,7 +31,7 @@ This project is a **Flask-based web application** that allows users to upload a 
    ```
 2. Install dependencies:
    ```sh
-   pip install flask ldap3 pandas openpyxl
+   pip install flask pandas ldap3 pycryptodome
    ```
 3. Run the application:
    ```sh
