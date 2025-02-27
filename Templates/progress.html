@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing...</title>
+    <script>
+        function fetchProgress() {
+            const eventSource = new EventSource("/progress");
+            eventSource.onmessage = function(event) {
+                document.getElementById("progress-status").innerText = event.data;
+                if (event.data === "COMPLETE") {
+                    eventSource.close();
+                    document.getElementById("download-link").style.display = "block";
+                }
+            };
+    
+            // Play notification sound when processing starts
+            var audio = new Audio("https://www.myinstants.com/media/sounds/notification-sound.mp3");
+            audio.play();
+        }
+    
+        window.onload = fetchProgress;
+    </script>
+    
+</head>
+<body>
+    <div class="container mt-4 text-center">
+        <h2>Processing Records...</h2>
+        <p id="progress-status">Starting...</p>
+        <a id="download-link" href="/download" style="display: none;" class="btn btn-success">Download Results</a>
+    </div>
+</body>
+</html>
