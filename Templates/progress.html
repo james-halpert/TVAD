@@ -9,20 +9,22 @@
             const eventSource = new EventSource("/progress");
             eventSource.onmessage = function(event) {
                 document.getElementById("progress-status").innerText = event.data;
-                if (event.data === "COMPLETE") {
+                
+                // Play sound when processing starts
+                if (event.data.includes("Processing 1/")) {
+                    var audio = new Audio("https://www.myinstants.com/media/sounds/notification-sound.mp3");
+                    audio.play();
+                }
+                
+                if (event.data.includes("COMPLETE")) {
                     eventSource.close();
                     document.getElementById("download-link").style.display = "block";
                 }
             };
-    
-            // Play notification sound when processing starts
-            var audio = new Audio("https://www.myinstants.com/media/sounds/notification-sound.mp3");
-            audio.play();
         }
-    
         window.onload = fetchProgress;
     </script>
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container mt-4 text-center">
