@@ -8,6 +8,18 @@ import ldap3
 import getpass
 from io import BytesIO
 from concurrent.futures import ThreadPoolExecutor
+import subprocess
+
+
+# Check and install missing dependencies
+required = ["flask", "pandas", "ldap3", "pycryptodome"]
+for package in required:
+    try:
+        __import__(package)
+    except ImportError:
+        print(f"Installing missing package: {package}")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
 
 # Determine base directory for PyInstaller bundling
 if getattr(sys, 'frozen', False):
